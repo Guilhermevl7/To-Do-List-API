@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/tags', createTag);
 router.get('/tags', getTags);
-router.put('/tags', updateTag);
+router.put('/tags/:id', updateTag);
 
 
 module.exports = router;

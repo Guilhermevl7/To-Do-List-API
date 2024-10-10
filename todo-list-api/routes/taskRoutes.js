@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.post('/tasks', createTask);
 router.get('/tasks', getTasks);
-router.put('tasks', updateTask)
+router.put('/tasks/:id', updateTask)
 
 module.exports = router; 
