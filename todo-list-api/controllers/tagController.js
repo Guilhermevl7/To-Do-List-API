@@ -11,4 +11,14 @@ const createTag = async (req, res) => {
   }
 };
 
-module.exports = { createTag };
+// listar tags
+const getTags = async (req, res) => {
+    try {
+        const tags = await Tag.find()
+        res.json(tags);
+    } catch (error) {
+        res.status(500).json({ message: 'Erro ao buscar', error: error.message});
+    }
+};
+
+module.exports = { createTag, getTags };
