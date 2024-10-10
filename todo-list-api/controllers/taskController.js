@@ -25,4 +25,15 @@ const getTasks = async (req, res) =>{
     }
 };
 
-module.exports = { createTask, getTasks };
+//Atualizar tarefa
+const updateTask = async (req, res) =>{
+    try {
+        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!task) return res.status(404).json({ message: 'Tarefa não encontrada' });
+        res.json(task);
+    } catch (error) {
+        res.status(400).json({ message: 'Erro ao atualizar tarefa', error: error.message });
+    }
+};
+
+module.exports = { createTask, getTasks, updateTask };
