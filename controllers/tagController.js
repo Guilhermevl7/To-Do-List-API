@@ -3,7 +3,7 @@ const Tag = require("../models/tag");
 //Criar tag
 const createTag = async (req, res) => {
   try {
-    const tag = new Tag(req.body);
+    const tag = new Tag({ ...req.body, ser: req.userId });
     await tag.save();
     res.status(201).json(tag);
   } catch (error) {
@@ -14,7 +14,7 @@ const createTag = async (req, res) => {
 // listar tags
 const getTags = async (req, res) => {
     try {
-        const tags = await Tag.find()
+        const tags = await Tag.find({ user: req.userId });
         res.json(tags);
     } catch (error) {
         res.status(500).json({ message: 'Erro ao buscar', error: error.message});

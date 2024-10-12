@@ -3,7 +3,7 @@ const Task = require('../models/task');
 //Criar tarefa 
 const createTask = async (req, res) => {
     try {
-        const task = new Task(req.body);
+        const task = new Task({ ...req.body , user: req.userId });
         await task.save();
         res.status(201).json(task);
     } catch (error) {
@@ -14,7 +14,7 @@ const createTask = async (req, res) => {
 //Listar e filtrar tarefas 
 const getTasks = async (req, res) =>{
     try {
-        let query = {};
+        let query = { user: req.userId };
         if (req.query.tags) {
             query.tags = {$in: req.query.tags.split(',')};
         }

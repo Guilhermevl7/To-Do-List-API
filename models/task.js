@@ -10,6 +10,11 @@ const taskSchema = new mongoose.Schema({
   priority: { type: Number, min: 1, max: 10 },
   description: String,
   tags: [{ type: mongoose.Schema.Types.ObjectId, ref: "Tag" }],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true, 
+  },
 });
 
 module.exports = mongoose.model("Task", taskSchema);
